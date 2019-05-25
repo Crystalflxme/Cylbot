@@ -7,20 +7,12 @@ let exp = require("./exp.json")
 var PREFIX = ";";
 
 var bot = new Discord.Client()
-//let cooldown = new Set()
 let workCooldown = new Set()
 
 bot.on("message", function(message) {
     if (message.author.equals(bot.user)) return;
 
     if (!message.content.startsWith(PREFIX)) return;
-
-    //if (cooldown.has(message.author.id)) {
-        //message.delete()
-        //return
-    //} else {
-        //cooldown.add(message.author.id)
-    //}
 
     var args = message.content.substring(PREFIX.length).split(" ");
 
@@ -170,9 +162,6 @@ bot.on("message", function(message) {
         default:
             message.reply(botConfig.ERR_MSG);
     }
-    //setTimeout(() => {
-        //cooldown.delete(message.author.id)
-    //}, botConfig.COMMAND_COOLDOWN * 1000)
     setTimeout(() => {
         workCooldown.delete(message.author.id)
     }, botConfig.POINTS_COOLDOWN * 1000)
