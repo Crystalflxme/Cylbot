@@ -107,14 +107,13 @@ bot.on("message", function(message) {
             if (!exp[message.author.id]) return message.reply("You don't have any points to gamble with, silly!")
             if (!args[1] === "heads") {
                 if (!args[1] === "tails") return message.reply("You must put heads or tails as your bet!")
-            }
-            if (!args[1] === "tails") {
+            } else if (!args[1] === "tails") {
                 if (!args[1] === "heads") return message.reply("You must put heads or tails as your bet!")
             }
             if (!args[2]) return message.reply("Point amount not found!")
             if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
-
             let winningChances = Math.floor(Math.random() * 2)
+            console.log(Math.floor(Math.random() * 2))
             if (winningChances === 1) {
                 // Heads
                 if (args[1] === "heads") {
@@ -123,8 +122,8 @@ bot.on("message", function(message) {
                         exp: exp[message.author.id].exp + (parseInt(args[2]) * 2)
                     }
                     var embed = new Discord.RichEmbed()
-                        .setColor(botConfig.DEFAULT_UI_COLOR)
-                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **doubled** it!`,false)
+                        .setColor(botConfig.SERVER_POINTS_UI_COLOR)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **doubled** it to ${parseInt(args[2]) * 2}!`,false)
                     message.channel.send(embed);
                 } else if (args[1] === "tails") {
                     // Lose
@@ -132,7 +131,7 @@ bot.on("message", function(message) {
                         exp: exp[message.author.id].exp - parseInt(args[2])
                     }
                     var embed = new Discord.RichEmbed()
-                        .setColor(botConfig.DEFAULT_UI_COLOR)
+                        .setColor(botConfig.SERVER_POINTS_UI_COLOR)
                         .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **lost** it!`,false)
                     message.channel.send(embed);
                 }
@@ -144,8 +143,8 @@ bot.on("message", function(message) {
                         exp: exp[message.author.id].exp + (parseInt(args[2]) * 2)
                     }
                     var embed = new Discord.RichEmbed()
-                        .setColor(botConfig.DEFAULT_UI_COLOR)
-                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **doubled** it!`,false)
+                        .setColor(botConfig.SERVER_POINTS_UI_COLOR)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **doubled** it to ${parseInt(args[2]) * 2}!`,false)
                     message.channel.send(embed);
                 } else if (args[1] === "heads") {
                     // Lose
@@ -153,7 +152,7 @@ bot.on("message", function(message) {
                         exp: exp[message.author.id].exp - parseInt(args[2])
                     }
                     var embed = new Discord.RichEmbed()
-                        .setColor(botConfig.DEFAULT_UI_COLOR)
+                        .setColor(botConfig.SERVER_POINTS_UI_COLOR)
                         .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **lost** it!`,false)
                     message.channel.send(embed);
                 }
