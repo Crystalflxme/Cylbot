@@ -104,6 +104,40 @@ bot.on("message", function(message) {
                 .addField("**🌟 Server Points 🌟**",`${message.author} just gave ${payUser} **${args[2]}** points!`,false)
             message.channel.send(embed);
             break;
+        case "coin":
+            if (!exp[message.author.id]) return message.reply("You don't have any points to gamble with, silly!")
+            let payUser = message.guild.member(message.mentions.users.first())
+            if (!args[1] === "heads") {
+                if (!args[1] === "tails") return message.reply("You must put heads or tails as your bet!")
+            }
+            if (!args[1] === "tails") {
+                if (!args[1] === "heads") return message.reply("You must put heads or tails as your bet!")
+            }
+            if (!args[2]) return message.reply("Point amount not found!")
+            if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
+            if (!exp[payUser.id]) {
+                exp[payUser.id] = {
+                    exp: 0
+                }
+            };
+            let payEXP = exp[payUser.id].exp
+            let selfEXP = exp[message.author.id].exp
+            if (selfEXP < parseInt(args[2])) return message.reply("You don't have enough points, silly!")
+            console.log(parseInt(args[2]))
+            exp[message.author.id] = {
+                exp: selfEXP - parseInt(args[2])
+            }
+            exp[payUser.id] = {
+                exp: payEXP + parseInt(args[2])
+            }
+            fs.writeFile("./exp.json", JSON.stringify(exp), (err) => {
+                if (err) console.log(`[SAVE POINTS ERROR] ${err}`)
+            })
+            var embed = new Discord.RichEmbed()
+                .setColor(botConfig.DEFAULT_UI_COLOR)
+                .addField("**🌟 Server Points 🌟**",`${message.author} just gave ${payUser} **${args[2]}** points!`,false)
+            message.channel.send(embed);
+            break;
         case "kidsreact":
             message.react(emojis[Math.floor(Math.random() * emojis.length)]);
             break;
