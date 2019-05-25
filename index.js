@@ -18,6 +18,7 @@ bot.on("message", function(message) {
 
     switch (args[0].toLowerCase()) {
         case "setprefix":
+            if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You need to be an admin to use that command!")
             if (args[1]) {
                 PREFIX = args[1]
                 message.reply(`The bot prefix was set to "${PREFIX}"`);
@@ -81,6 +82,8 @@ bot.on("message", function(message) {
             if (!payUser) return message.reply("User not found!")
             if (!args[2]) return message.reply("Point amount not found!")
             if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
+            if (parseInt(args[2]) === 0) return message.reply("You can't pay 0 points, silly!")
+            if (exp[message.author.id].exp > parseInt(args[2])) return message.reply("You dont have enough points for that, silly!")
             if (!exp[payUser.id]) {
                 exp[payUser.id] = {
                     exp: 0
@@ -99,19 +102,18 @@ bot.on("message", function(message) {
                 if (err) console.log(`[SAVE POINTS ERROR] ${err}`)
             })
             var embed = new Discord.RichEmbed()
-                .setColor(botConfig.DEFAULT_UI_COLOR)
+                .setColor(botConfig.SERVER_POINTS_UI_COLOR)
                 .addField("**🌟 Server Points 🌟**",`${message.author} just gave ${payUser} **${args[2]}** points!`,false)
             message.channel.send(embed);
             break;
         case "coin":
             if (!exp[message.author.id]) return message.reply("You don't have any points to gamble with, silly!")
-            if (!args[1] === "heads") {
-                if (!args[1] === "tails") return message.reply("You must put heads or tails as your bet!")
-            } else if (!args[1] === "tails") {
-                if (!args[1] === "heads") return message.reply("You must put heads or tails as your bet!")
-            }
+            if (!args[1] === "heads") return message.reply("You must put heads or tails as your bet!")
+            if (!args[1] === "tails") return message.reply("You must put heads or tails as your bet!")
             if (!args[2]) return message.reply("Point amount not found!")
             if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
+            if (exp[message.author.id].exp > parseInt(args[2])) return message.reply("You dont have enough points for that, silly!")
+            if (parseInt(args[2]) === 0) return message.reply("You can't bet 0 points, silly!")
             let winningChances = Math.floor(Math.random() * 2)
             console.log(Math.floor(Math.random() * 2))
             if (winningChances === 1) {
@@ -123,7 +125,7 @@ bot.on("message", function(message) {
                     }
                     var embed = new Discord.RichEmbed()
                         .setColor(botConfig.SERVER_POINTS_UI_COLOR)
-                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **doubled** it to ${parseInt(args[2]) * 2}!`,false)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **doubled** it to **${parseInt(args[2]) * 2}**!`,false)
                     message.channel.send(embed);
                 } else if (args[1] === "tails") {
                     // Lose
@@ -144,7 +146,7 @@ bot.on("message", function(message) {
                     }
                     var embed = new Discord.RichEmbed()
                         .setColor(botConfig.SERVER_POINTS_UI_COLOR)
-                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **doubled** it to ${parseInt(args[2]) * 2}!`,false)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **doubled** it to **${parseInt(args[2]) * 2}**!`,false)
                     message.channel.send(embed);
                 } else if (args[1] === "heads") {
                     // Lose
