@@ -89,7 +89,6 @@ bot.on("message", function(message) {
             let payEXP = exp[payUser.id].exp
             let selfEXP = exp[message.author.id].exp
             if (selfEXP < parseInt(args[2])) return message.reply("You don't have enough points, silly!")
-            console.log(parseInt(args[2]))
             exp[message.author.id] = {
                 exp: selfEXP - parseInt(args[2])
             }
@@ -115,28 +114,54 @@ bot.on("message", function(message) {
             }
             if (!args[2]) return message.reply("Point amount not found!")
             if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
-            if (!exp[payUser.id]) {
-                exp[payUser.id] = {
-                    exp: 0
+
+            let winningChances = Math.floor(Math.random() * 2)
+            if (winningChances === 1) {
+                // Heads
+                if (args[1] === "heads") {
+                    // Win
+                    exp[message.author.id] = {
+                        exp: exp[message.author.id].exp + (parseInt(args[2]) * 2)
+                    }
+                    var embed = new Discord.RichEmbed()
+                        .setColor(botConfig.DEFAULT_UI_COLOR)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **doubled** it!`,false)
+                    message.channel.send(embed);
+                } else if (args[1] === "tails") {
+                    // Lose
+                    exp[message.author.id] = {
+                        exp: exp[message.author.id].exp - parseInt(args[2])
+                    }
+                    var embed = new Discord.RichEmbed()
+                        .setColor(botConfig.DEFAULT_UI_COLOR)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **lost** it!`,false)
+                    message.channel.send(embed);
                 }
-            };
-            let payEXP = exp[payUser.id].exp
-            let selfEXP = exp[message.author.id].exp
-            if (selfEXP < parseInt(args[2])) return message.reply("You don't have enough points, silly!")
-            console.log(parseInt(args[2]))
-            exp[message.author.id] = {
-                exp: selfEXP - parseInt(args[2])
-            }
-            exp[payUser.id] = {
-                exp: payEXP + parseInt(args[2])
+            } else if (winningChances === 2) {
+                // Tails
+                if (args[1] === "tails") {
+                    // Win
+                    exp[message.author.id] = {
+                        exp: exp[message.author.id].exp + (parseInt(args[2]) * 2)
+                    }
+                    var embed = new Discord.RichEmbed()
+                        .setColor(botConfig.DEFAULT_UI_COLOR)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on tails and **doubled** it!`,false)
+                    message.channel.send(embed);
+                } else if (args[1] === "heads") {
+                    // Lose
+                    exp[message.author.id] = {
+                        exp: exp[message.author.id].exp - parseInt(args[2])
+                    }
+                    var embed = new Discord.RichEmbed()
+                        .setColor(botConfig.DEFAULT_UI_COLOR)
+                        .addField("**🌟 Server Points 🌟**",`${message.author} just bet **${args[2]}** points on heads and **lost** it!`,false)
+                    message.channel.send(embed);
+                }
             }
             fs.writeFile("./exp.json", JSON.stringify(exp), (err) => {
                 if (err) console.log(`[SAVE POINTS ERROR] ${err}`)
             })
-            var embed = new Discord.RichEmbed()
-                .setColor(botConfig.DEFAULT_UI_COLOR)
-                .addField("**🌟 Server Points 🌟**",`${message.author} just gave ${payUser} **${args[2]}** points!`,false)
-            message.channel.send(embed);
             break;
         case "kidsreact":
             message.react(emojis[Math.floor(Math.random() * emojis.length)]);
@@ -180,7 +205,8 @@ bot.on("message", function(message) {
                 .addField("-------- Economy Commands --------","These commands deal with server points.",false)
                 .addField(`${PREFIX}work`,"Work for a random amount of coins.",false)
                 .addField(`${PREFIX}balance {user}`,"Check the points balance of a user.",false)
-                .addField(`${PREFIX}pay {user}`,"Send server points to another user.",false)
+                .addField(`${PREFIX}pay {user} {amount}`,"Send server points to another user.",false)
+                .addField(`${PREFIX}coin {heads or tails} {bet amount}`,"If you win you double your money; if you don't you lose it.",false)
             message.reply(embed);
             break;
         case "help":
