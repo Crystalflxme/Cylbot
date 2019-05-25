@@ -105,7 +105,6 @@ bot.on("message", function(message) {
             break;
         case "coin":
             if (!exp[message.author.id]) return message.reply("You don't have any points to gamble with, silly!")
-            let payUser = message.guild.member(message.mentions.users.first())
             if (!args[1] === "heads") {
                 if (!args[1] === "tails") return message.reply("You must put heads or tails as your bet!")
             }
