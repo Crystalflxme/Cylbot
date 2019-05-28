@@ -5,26 +5,56 @@ const botConfig = require("./bot-config.json")
 let exp = require("./exp.json")
 
 var PREFIX = ";";
+var cylbotAdminRole
 
 var bot = new Discord.Client()
 let workCooldown = new Set()
 
 bot.on("message", function(message) {
+    if (!message.member.roles.some(role => role.name === "Cylbot Admin")) {
+        cylbotAdminRole = message.member.guild.createRole({
+            name: "Cylbot Admin",
+            color: "0xFF4000",
+            hoist: false,
+        })
+    }
     if (message.author.equals(bot.user)) return;
-
     if (!message.content.startsWith(PREFIX)) return;
-
     var args = message.content.substring(PREFIX.length).split(" ");
-
     switch (args[0].toLowerCase()) {
         case "setprefix":
-            if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply("You need to be an admin to use that command!")
+            if (!message.member.roles.some(role => role.name === cylbotAdminRole)) {
+                cylbotAdminRole = message.member.guild.createRole({
+                    name: "Cylbot Admin",
+                    color: "0xFF4000",
+                    hoist: false,
+                })
+            }
+            if (!message.member.roles.some(role => cylbotAdminRole)) return message.reply("You need to be a Cylbot admin to use that command!")
             if (args[1]) {
                 PREFIX = args[1]
                 message.reply(`The bot prefix was set to "${PREFIX}"`);
             } else {
                 message.reply(botConfig.ERR_MSG);
             }
+            break;
+        case "botadmin":
+            if (!message.member.roles.some(role => role === cylbotAdminRole)) {
+                cylbotAdminRole = message.member.guild.createRole({
+                    name: "Cylbot Admin",
+                    color: "0xFF4000",
+                    hoist: false,
+                })
+            }
+            if (!message.member.roles.some(role => cylbotAdminRole)) return message.reply("You need to be a Cylbot admin to use that command!")
+            let adminUser = message.guild.member(message.mentions.users.first())
+            if (!adminUser) return message.reply("User not found!")
+            adminUser.addRole(cylbotAdminRole)
+                .then(message.reply(`${adminUser} is now a Cylbot admin!`))
+                .catch(); {
+                    console.log("[SET ROLE PROBLEM] Problem setting Cylbot admin role.")
+                    message.reply("Problem setting admin role.")
+                }
             break;
         case "ask":
             message.reply(answers[Math.floor(Math.random() * answers.length)])
@@ -41,9 +71,9 @@ bot.on("message", function(message) {
                     exp: 0
                 }
             };
-            let expAmt = Math.floor(Math.random() * 15) + 1;
+            let expAmt = Math.floor(Math.random() * botConfig.MAX_WORK_AMOUNT) + 1;
             if (workCooldown.has(message.author.id)) {
-                message.reply("You must wait for the work cooldown to end (30 minutes)!")
+                message.reply("You must wait for the work cooldown to end (5 minutes)!")
                 message.delete()
                 return
             } else {
