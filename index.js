@@ -5,32 +5,27 @@ const botConfig = require("./bot-config.json")
 let exp = require("./exp.json")
 
 var PREFIX = ";";
-var cylbotAdminRole
 
 var bot = new Discord.Client()
 let workCooldown = new Set()
 
 bot.on("message", function(message) {
-    if (!message.member.roles.some(role => role.name === "Cylbot Admin")) {
-        cylbotAdminRole = message.member.guild.createRole({
+    if (message.author.equals(bot.user)) return;
+    if (!message.content.startsWith(PREFIX)) return;
+    let adminRoleName = message.guild.roles.find(x => x.name == "Cylbot Admin");
+    let adminRoleNameFind = message.member.roles.find(x => x.name == "Cylbot Admin");
+    if (!adminRoleName) {
+        console.log("a")
+        message.member.guild.createRole({
             name: "Cylbot Admin",
             color: "0xFF4000",
             hoist: false,
         })
     }
-    if (message.author.equals(bot.user)) return;
-    if (!message.content.startsWith(PREFIX)) return;
     var args = message.content.substring(PREFIX.length).split(" ");
     switch (args[0].toLowerCase()) {
         case "setprefix":
-            if (!message.member.roles.some(role => role.name === cylbotAdminRole)) {
-                cylbotAdminRole = message.member.guild.createRole({
-                    name: "Cylbot Admin",
-                    color: "0xFF4000",
-                    hoist: false,
-                })
-            }
-            if (!message.member.roles.some(role => cylbotAdminRole)) return message.reply("You need to be a Cylbot admin to use that command!")
+            if (!adminRoleNameFind) return message.reply("You need to be a Cylbot admin to use that command!")
             if (args[1]) {
                 PREFIX = args[1]
                 message.reply(`The bot prefix was set to "${PREFIX}"`);
@@ -39,17 +34,10 @@ bot.on("message", function(message) {
             }
             break;
         case "botadmin":
-            if (!message.member.roles.some(role => role === cylbotAdminRole)) {
-                cylbotAdminRole = message.member.guild.createRole({
-                    name: "Cylbot Admin",
-                    color: "0xFF4000",
-                    hoist: false,
-                })
-            }
-            if (!message.member.roles.some(role => cylbotAdminRole)) return message.reply("You need to be a Cylbot admin to use that command!")
+            if (!adminRoleNameFind) return message.reply("You need to be a Cylbot admin to use that command!")
             let adminUser = message.guild.member(message.mentions.users.first())
             if (!adminUser) return message.reply("User not found!")
-            adminUser.addRole(cylbotAdminRole)
+            adminUser.addRole(message.guild.roles.find("name", "Cylbot Admin"))
                 .then(message.reply(`${adminUser} is now a Cylbot admin!`))
                 .catch(); {
                     console.log("[SET ROLE PROBLEM] Problem setting Cylbot admin role.")
@@ -81,7 +69,7 @@ bot.on("message", function(message) {
                     exp: exp[message.author.id].exp + expAmt
                 };
                 fs.writeFile("./exp.json", JSON.stringify(exp), (err) => {
-                    if (err) console.log(`[SAVE POINTS ERROR] ${err}`)
+                    if (err) console.log(`[SAVE POINTS ERROR] ${err} in ${message.guild.name} (${message.guild.id})`)
                 });
                 var embed = new Discord.RichEmbed()
                     .setColor(botConfig.SERVER_POINTS_UI_COLOR)
@@ -129,7 +117,7 @@ bot.on("message", function(message) {
                 exp: payEXP + parseInt(args[2])
             }
             fs.writeFile("./exp.json", JSON.stringify(exp), (err) => {
-                if (err) console.log(`[SAVE POINTS ERROR] ${err}`)
+                if (err) console.log(`[SAVE POINTS ERROR] ${err} in ${message.guild.name} (${message.guild.id})`)
             })
             var embed = new Discord.RichEmbed()
                 .setColor(botConfig.SERVER_POINTS_UI_COLOR)
@@ -190,7 +178,7 @@ bot.on("message", function(message) {
                 }
             }
             fs.writeFile("./exp.json", JSON.stringify(exp), (err) => {
-                if (err) console.log(`[SAVE POINTS ERROR] ${err}`)
+                if (err) console.log(`[SAVE POINTS ERROR] ${err} in ${message.guild.name} (${message.guild.id})`)
             })
             break;
         case "kidsreact":
