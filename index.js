@@ -15,10 +15,8 @@ bot.on("message", function(message) {
     let adminRoleName = message.guild.roles.find(x => x.name == "Cylbot Admin");
     let adminRoleNameFind = message.member.roles.find(x => x.name == "Cylbot Admin");
     if (!adminRoleName) {
-        console.log("a")
         message.member.guild.createRole({
             name: "Cylbot Admin",
-            color: "0xFF4000",
             hoist: false,
         })
     }
@@ -37,12 +35,7 @@ bot.on("message", function(message) {
             if (!adminRoleNameFind) return message.reply("You need to be a Cylbot admin to use that command!")
             let adminUser = message.guild.member(message.mentions.users.first())
             if (!adminUser) return message.reply("User not found!")
-            adminUser.addRole(message.guild.roles.find("name", "Cylbot Admin"))
-                .then(message.reply(`${adminUser} is now a Cylbot admin!`))
-                .catch(); {
-                    console.log("[SET ROLE PROBLEM] Problem setting Cylbot admin role.")
-                    message.reply("Problem setting admin role.")
-                }
+            adminUser.addRole(message.member.guild.roles.find("name", "Cylbot Admin"))
             break;
         case "ask":
             message.reply(answers[Math.floor(Math.random() * answers.length)])
