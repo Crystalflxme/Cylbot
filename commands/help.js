@@ -19,6 +19,7 @@ module.exports = class test {
             .setFooter("Created by Crystalflame")
             .addField("Description:",botConfig.BOT_DESCRIPTION,false)
             .addField("Created:",bot.user.createdAt,false)
+            .addField("Invite Link:","||https://discordapp.com/api/oauth2/authorize?client_id=586696865052098581&permissions=8&scope=bot||")
         message.reply(embed);
     }
 }

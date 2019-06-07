@@ -1,2 +1,3 @@
-# Make sure never to override the EXP storage!
+# Ignore these files
 exp.json
+bot-secrets.json
