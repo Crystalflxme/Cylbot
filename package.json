@@ -9,6 +9,7 @@
   "author": "Crystalflame",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "djs-commands": "^1.2.2"
   }
 }
