@@ -18,11 +18,11 @@ module.exports = class test {
         if (!args[1] === "tails") return message.reply("You must put heads or tails as your bet!")
         if (!args[2]) return message.reply("Point amount not found!")
         if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
-        if (exp[message.author.id].exp > parseInt(args[2])) return message.reply("You dont have enough points for that, silly!")
         if (parseInt(args[2]) === 0) return message.reply("You can't bet 0 points, silly!")
         if(Math.sign(parseInt(args[2])) === -1) return message.reply("You can't bet negative points, silly!")
-        let winningChances = Math.floor(Math.random() * 2)
-        console.log(winningChances)
+        if (exp[message.author.id].id >= parseInt(args[2])) return message.reply("You don't have enough points for that, silly!")
+        let winningChances = Math.floor(Math.random() * 2) + 1
+        //console.log(winningChances)
         if (winningChances === 1) {
             // Heads
             if (args[1] === "heads") {

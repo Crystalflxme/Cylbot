@@ -17,10 +17,11 @@ module.exports = class test {
         let payUser = message.guild.member(message.mentions.users.first())
         if (!payUser) return message.reply("User not found!")
         if (!args[2]) return message.reply("Point amount not found!")
-        if (!Number.isInteger(parseInt(args[2]))) return message.reply("Point amount isn't a number!")
-        if (parseInt(args[2]) === 0) return message.reply("You can't pay 0 points, silly!")
-        if(Math.sign(parseInt(args[2])) === -1) return message.reply("You can't pay negative points, silly!")
-        if (exp[message.author.id].id >= parseInt(args[2])) return message.reply("You don't have enough points for that, silly!")
+        let pointAmount = parseInt(args[2])
+        if (!Number.isInteger(pointAmount)) return message.reply("Point amount isn't a number!")
+        if (exp[message.author.id].id >= pointAmount) return message.reply("You don't have enough points for that, silly!")
+        if (pointAmount === 0) return message.reply("You can't pay 0 points, silly!")
+        if(Math.sign(pointAmount) === -1) return message.reply("You can't pay negative points, silly!")
         if (!exp[payUser.id]) {
             exp[payUser.id] = {
                 exp: 0
@@ -29,10 +30,10 @@ module.exports = class test {
         let payEXP = exp[payUser.id].exp
         let selfEXP = exp[message.author.id].exp
         exp[message.author.id] = {
-            exp: selfEXP - parseInt(args[2])
+            exp: selfEXP - pointAmount
         }
         exp[payUser.id] = {
-            exp: payEXP + parseInt(args[2])
+            exp: payEXP + pointAmount
         }
         fs.writeFile("./../exp.json", JSON.stringify(exp), (err) => {
             if (err) console.log(`[SAVE POINTS ERROR] ${err} in ${message.guild.name} (${message.guild.id})`)
