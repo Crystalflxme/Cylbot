@@ -1,1 +1,2 @@
-/exp.json
+# Make sure never to override the EXP storage!
+exp.json
