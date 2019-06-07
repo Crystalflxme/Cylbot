@@ -4,22 +4,13 @@
 <br>
 <strong><i>Cylbot is a unique multi-use Discord bot by Crystalflame</i></strong>
 <br>
-<br>
-<hr>
-
-<br>
-<br>
-<br>
-<br>
-</div>
-<hr>
-<br>
 
 
 ## Get Cylbot
-You can invite Cylbot right here[https://discordapp.com/oauth2/authorize?client_id=522392874487119904&permissions=8&scope=bot].
+You can invite Cylbot right [here](https://discordapp.com/oauth2/authorize?client_id=522392874487119904&permissions=8&scope=bot).
 
 ---
+
 
 ## Use
 Please do not steal the code from this bot. You can learn from it, just please do not steal.
