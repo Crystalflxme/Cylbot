@@ -10,4 +10,4 @@
 <br>
 
 ## Get Cylbot
-You can invite Cylbot right [here](https://discordapp.com/oauth2/authorize?client_id=522392874487119904&permissions=8&scope=bot).
+You can invite Cylbot right [here](https://discordapp.com/api/oauth2/authorize?client_id=586696865052098581&permissions=0&scope=bot).
