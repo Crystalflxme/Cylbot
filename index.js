@@ -23,7 +23,7 @@ bot.on("message", (message) => {
 });
 
 bot.on("ready", () => {
-    bot.user.setActivity("for ;cmds", {type:"WATCHING"})
+    bot.user.setActivity("for ;commands", {type:"WATCHING"})
     console.log(`[STARTUP] ${botConfig.BOT_NAME} ${botConfig.BOT_VERSION} started!`)
     console.log(`[STARTUP] ${botConfig.BOT_NAME} is currently running on ${bot.guilds.size} servers.`)
 });
