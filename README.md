@@ -1,6 +1,7 @@
 <div align="center">
-<img src="https://i.imgur.com/myViDoY.png" alt="Cylbot Header Image">
+<img src="https://i.imgur.com/EzkdMMa.png" alt="Cylbot Icon">
 <br>
+<strong>Cylbot is a unique multi-use Discord bot.</strong>
 <br>
 <a href="https://github.com/Crystalflxme/Cylbot/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 <a href="https://www.npmjs.com/package/discord.js"><img src="https://img.shields.io/badge/lib-discord.js-blue.svg"/></a>
