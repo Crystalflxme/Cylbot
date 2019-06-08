@@ -1,13 +1,21 @@
 <div align="center">
-<img src="https://i.imgur.com/myViDoY.png" align="center" alt="Cylbot Header Image">
+<img src="https://i.imgur.com/myViDoY.png" alt="Cylbot Header Image">
 <br>
 <br>
-<img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" align="center" alt="MIT License">
+<img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
+<img src="https://img.shields.io/badge/lib-discord.js-blue.svg" alt="discord.js Lib">
 <br>
-
+<br>
+<h1><a href="https://discordapp.com/api/oauth2/authorize?client_id=586696865052098581&permissions=8&scope=bot">Invite Cylbot</a></h1>
 </div>
 <br>
 <br>
 
-## Get Cylbot
-You can invite Cylbot right [here](https://discordapp.com/api/oauth2/authorize?client_id=586696865052098581&permissions=8&scope=bot).
+## Contribute to Cylbot
+If you want to help out with the development of Cylbot, you could...
+
+**Submit a Bug Report**
+To do so, click [here](https://github.com/Crystalflxme/Cylbot/issues/new?assignees=Crystalflxme&labels=bug&template=bug_report.md&title=) to create a bug report.
+
+**Submit a Future Request**
+Click [here](https://github.com/Crystalflxme/Cylbot/issues/new?assignees=Crystalflxme&labels=enhancement&template=feature_request.md&title=) to propose a future request.
