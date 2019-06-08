@@ -8,9 +8,6 @@ module.exports = class test {
     }
  
     async run(bot, message, args) {
-        const fs = require("fs")
-        const commandData = require("./commandData.json")
-
         const botConfig = require("./../bot-config.json")
         var embed = new Discord.RichEmbed()
             .setColor(botConfig.DEFAULT_UI_COLOR)

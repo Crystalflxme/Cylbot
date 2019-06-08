@@ -11,7 +11,6 @@ module.exports = class test {
  
     async run(bot, message, args) {
         const fs = require("fs")
-        const commandData = require("./commandData.json")
         let workCooldown = new Set()
 
         let exp = require("./../exp.json")

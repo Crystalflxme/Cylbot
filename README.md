@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/myViDoY.png" align="center" alt="Cylbot Header Image">
 <br>
 <br>
-<strong><i>Cylbot is a unique multi-use Discord bot by Crystalflame</i></strong>
+<img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" align="center" alt="MIT License">
 <br>
 
 </div>

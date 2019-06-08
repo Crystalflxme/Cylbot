@@ -8,7 +8,6 @@ module.exports = class test {
     }
  
     async run(bot, message, args) {
-        const fs = require("fs")
         const commandData = require("./commandData.json")
 
         message.reply(commandData["COINFLIPS"][Math.floor(Math.random() * commandData["COINFLIPS"].length)])

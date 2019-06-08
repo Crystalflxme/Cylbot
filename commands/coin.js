@@ -9,8 +9,7 @@ module.exports = class test {
  
     async run(bot, message, args) {
         const fs = require("fs")
-        const commandData = require("./commandData.json")
-
+        
         let exp = require("./../exp.json")
         const botConfig = require("./../bot-config.json")
         if (!exp[message.author.id]) return message.reply("You don't have any points to gamble with, silly!")

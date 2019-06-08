@@ -8,9 +8,6 @@ module.exports = class test {
     }
  
     async run(bot, message, args) {
-        const fs = require("fs")
-        const commandData = require("./commandData.json")
-
         let adminRoleName = message.guild.roles.find(x => x.name == "Cylbot Admin");
         let adminRoleNameFind = message.member.roles.find(x => x.name == "Cylbot Admin");
         if (!adminRoleName) {

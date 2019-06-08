@@ -8,9 +8,6 @@ module.exports = class test {
     }
  
     async run(bot, message, args) {
-        const fs = require("fs")
-        const commandData = require("./commandData.json")
-
         let exp = require("./../exp.json")
         const botConfig = require("./../bot-config.json")
         let findUser = message.guild.member(message.mentions.users.first())
