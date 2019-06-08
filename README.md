@@ -3,6 +3,7 @@
 <br>
 <strong>Cylbot is a unique multi-use Discord bot.</strong>
 <br>
+<br>
 <a href="https://github.com/Crystalflxme/Cylbot/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg"/></a>
 <a href="https://www.npmjs.com/package/discord.js"><img src="https://img.shields.io/badge/lib-discord.js-blue.svg"/></a>
 <a href="https://discord.gg/r4mbXFM"><img src="https://img.shields.io/badge/support%20discord-join-blueviolet.svg"/></a>
