@@ -4,7 +4,7 @@ const botSecrets = require("./bot-secrets.json")
 const botConfig = require("./bot-config.json")
 const CH = new CommandHandler({
     folder: __dirname + '/commands/',
-    prefix: [';', 'cyl;']
+    prefix: [';']
 });
 var bot = new Discord.Client()
 
