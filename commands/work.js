@@ -5,7 +5,7 @@ const Discord = require("discord.js");
 module.exports = class test {
     constructor(){
             this.name = 'work',
-            this.alias = ['w']
+            this.alias = ['work']
             this.usage = ';work'
     }
  
