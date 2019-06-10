@@ -1,3 +1,4 @@
 # Ignore these files
 exp.json
 bot-secrets.json
+prefixes.json
