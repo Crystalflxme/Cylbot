@@ -12,6 +12,9 @@
     "discord.js": "^11.4.2",
     "discord.js-musicbot-addon": "^13.6.0",
     "djs-commands": "^1.2.2",
-    "mongoose": "^5.5.14"
+    "ffmpeg": "0.0.4",
+    "mongoose": "^5.5.14",
+    "node-gyp": "^5.0.2",
+    "opusscript": "0.0.6"
   }
 }
