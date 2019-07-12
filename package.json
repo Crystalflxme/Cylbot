@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2",
+    "discord.js-musicbot-addon": "^13.6.0",
     "djs-commands": "^1.2.2",
     "mongoose": "^5.5.14"
   }
