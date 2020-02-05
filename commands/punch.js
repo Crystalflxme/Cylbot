@@ -15,7 +15,11 @@ module.exports = class test {
         if (punchUser.id != message.author.id) {
             let chosenMsg = commandData["PUNCHMSGs"][Math.floor(Math.random() * commandData["PUNCHMSGs"].length)]
             let msgRev = chosenMsg.replace(/{user1}/g, message.author)
-            message.channel.send(msgRev.replace(/{user2}/g, punchUser))
+            if (punchUser.id == bot.user.id) {
+                message.channel.send(msgRev.replace(/{user2}/g, punchUser) + " That really hurt! 😭")
+            } else {
+                message.channel.send(msgRev.replace(/{user2}/g, punchUser))
+            }
         } else if (punchUser.id === message.author.id) {
             message.reply(commandData["PUNCHMSGs2"][Math.floor(Math.random() * commandData["PUNCHMSGs2"].length)])
         }

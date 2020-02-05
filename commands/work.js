@@ -1,6 +1,5 @@
-// FIX COOLDOWN!!!
-
 const Discord = require("discord.js");
+let workCooldown = new Set()
 
 module.exports = class test {
     constructor(){
@@ -10,31 +9,28 @@ module.exports = class test {
     }
  
     async run(bot, message, args) {
-        const fs = require("fs")
-        let workCooldown = new Set()
-
-        let exp = require("./../exp.json")
-        const botConfig = require("./../bot-config.json")
-        if (!exp[message.author.id]) {
-            exp[message.author.id] = {
-                exp: 0
-            }
-        };
-        let expAmt = Math.floor(Math.random() * botConfig.MAX_WORK_AMOUNT) + 1;
         if (workCooldown.has(message.author.id)) {
             message.reply("You must wait for the work cooldown to end (5 minutes)!")
-            message.delete()
             return
         } else {
-            exp[message.author.id] = {
-                exp: exp[message.author.id].exp + expAmt
+            const fs = require("fs")
+            let points = require("./../points.json")
+            const botConfig = require("./../bot-config.json")
+            if (!points[message.author.id]) {
+                points[message.author.id] = {
+                    points: 0
+                }
             };
-            fs.writeFile("./exp.json", JSON.stringify(exp), (err) => {
+            let pointsAmt = Math.floor(Math.random() * botConfig.MAX_WORK_AMOUNT) + 1;
+            points[message.author.id] = {
+                points: points[message.author.id].points + pointsAmt
+            };
+            fs.writeFile("./points.json", JSON.stringify(points), (err) => {
                 if (err) console.log(`[SAVE POINTS ERROR] ${err} in ${message.guild.name} (${message.guild.id})`)
             });
             var embed = new Discord.RichEmbed()
                 .setColor(botConfig.SERVER_POINTS_UI_COLOR)
-                .addField("**🌟 Server Points 🌟**",`${message.author} just worked for **${expAmt}** points!`,false)
+                .addField("**🌟 Server Points 🌟**",`${message.author} just worked for **${pointsAmt}** points!`,false)
             message.channel.send(embed);
             workCooldown.add(message.author.id)
             setTimeout(() => {
