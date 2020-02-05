@@ -1,6 +1,6 @@
 {
-  "name": "cylbot",
-  "version": "1.0.0",
+  "name": "Cylbot",
+  "version": "1.1.0",
   "description": "Cylbot is a unique multi-use Discord bot.",
   "main": "index.js",
   "scripts": {
