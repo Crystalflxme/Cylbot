@@ -1,8 +1,8 @@
 {
-  "name": "Cylbot",
-  "version": "1.1.0",
+  "name": "cylbot",
+  "version": "1.2.0",
   "description": "Cylbot is a unique multi-use Discord bot.",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "djs-commands": "^1.2.2"
+    "djs-commands": "^1.2.2",
+    "mysql": "^2.18.1"
   }
 }

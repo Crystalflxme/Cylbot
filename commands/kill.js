@@ -9,7 +9,6 @@ module.exports = class test {
  
     async run(bot, message, args) {
         const commandData = require("./command-data.json")
-
         let killUser = message.guild.member(message.mentions.users.first())
         if (!killUser) return message.reply("User not found!")
         if (killUser.id != message.author.id) {

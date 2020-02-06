@@ -9,7 +9,6 @@ module.exports = class test {
  
     async run(bot, message, args) {
         const commandData = require("./command-data.json")
-
         let slapUser = message.guild.member(message.mentions.users.first())
         if (!slapUser) return message.reply("User not found!")
         if (slapUser.id != message.author.id) {

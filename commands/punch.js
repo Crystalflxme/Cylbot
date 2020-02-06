@@ -9,7 +9,6 @@ module.exports = class test {
  
     async run(bot, message, args) {
         const commandData = require("./command-data.json")
-
         let punchUser = message.guild.member(message.mentions.users.first())
         if (!punchUser) return message.reply("User not found!")
         if (punchUser.id != message.author.id) {
