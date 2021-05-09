@@ -14,6 +14,11 @@
 <br>
 <br>
 
+## Important Notice
+Cylbot isn't being worked on anymore.
+
+<br>
+
 ## Contribute to Cylbot
 If you want to help out with the development of Cylbot, you could...
 
